@@ -1,0 +1,24 @@
+{
+  "name": "mern-stack-ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon backend/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishanprime/MERN-Ecommerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nishanprime/MERN-Ecommerce/issues"
+  },
+  "homepage": "https://github.com/nishanprime/MERN-Ecommerce#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
