@@ -1,7 +1,16 @@
 import express from 'express';
-import products from './datas/product.js';
-
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import colors from 'colors';
+import productRoutes from './routes/productRoutes.js';
+import bodyParser from 'body-parser';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+dotenv.config();
+connectDB();
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: 'application/*+json' }));
 
 app.get('/', (req, res) => {
   res.json({
@@ -9,13 +18,17 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/api/products', (req, res) => {
-  res.json(products);
-});
+app.use('/api/products', productRoutes);
 
-app.get('/api/products/:id', (req, res) => {
-  const product = products.find(p => p._id === req.params.id);
-  res.json(product);
-});
+app.use(notFound);
 
-app.listen(5000, console.log('Server is running on port 5000'));
+app.use(errorHandler);
+
+const PORT = process.env.PORT;
+app.listen(
+  PORT,
+  console.log(
+    `Server is running on port ${process.env.PORT}, in ${process.env.NODE_ENV}`
+      .yellow.bold
+  )
+);
